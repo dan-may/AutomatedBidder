@@ -1,6 +1,6 @@
 # AutomatedBidder
 
-Built on Python 3.4
+Built on Python **3.4**
 
 ##Installation:
 - install packages from requirements.txt
