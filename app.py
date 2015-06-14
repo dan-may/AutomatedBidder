@@ -46,6 +46,7 @@ def hello():
 @app.route('/keyword-performance/<string:keyword>')
 def keyword_performance(keyword):
     """Gets keyword data"""
+    keyword = keyword.replace('"', '').replace("'", '')
     start_date = request.args.get('start_date', '')
     end_date = request.args.get('end_date', '')
     if start_date == '' or end_date == '':
@@ -67,13 +68,6 @@ def keyword_performance(keyword):
 
     return jsonify(rpc = rpc, std = std)
 
-    # Uncomment to return selected data for a keyword
-    #data = []
-    #for row in query_db('select * from keyword_performance where keyword_id = ?', (keyword_id['keyword_id'],)):
-    #    data.append({'date': row['date'], 'cpc': row['cpc'], 'clicks': row['clicks'], 'cost': row['cost'], 'revenue': row['revenue']})
-        
-    #return jsonify({'keyword-performance': data})
-
 if __name__ == '__main__':
     import os
     HOST = os.environ.get('SERVER_HOST', 'localhost')
@@ -81,4 +75,4 @@ if __name__ == '__main__':
         PORT = int(os.environ.get('SERVER_PORT', '5555'))
     except ValueError:
         PORT = 5555
-    app.run(HOST, PORT, debug=True)
+    app.run(HOST, PORT)

@@ -11,7 +11,7 @@ import urllib.request
 def main(args):
     try: 
         # Call the web service with our keyword, date range, and target margin
-        response = urllib.request.urlopen("http://127.0.0.1:5555/keyword-performance/" + str.strip(args[2], "'").strip() + 
+        response = urllib.request.urlopen("http://127.0.0.1:5555/keyword-performance/" + args[2].strip().replace(' ', '%20') + 
                                "?start_date=" + str.strip(args[0], "'").strip() + "&end_date=" + str.strip(args[1], "'").strip())
         # Decode the response
         data = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))

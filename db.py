@@ -36,7 +36,7 @@ if __name__ == '__main__':
         ("music", None)
                 ]
     
-    variance = (0.1, 10, 7, 15, 30, 0.3, 0.4, 1, 12, 16, 15, 4.5)
+    variance = (0.1, 2, 1.7, 5.7, 3.3, 0.3, 0.4, 1, 7.2, 3, 3.2, 4.5)
 
     # Iterate over keywords to produce performance data for each keyword each day
     for day in rrule.rrule(rrule.DAILY, dtstart=start, until=end):
@@ -45,16 +45,18 @@ if __name__ == '__main__':
             id = keywords.index(keyword) + 1
             cpc = random.normalvariate(1, 0.2)
             impressions = random.randint(1000000, 10000000)
-            clicks = round(impressions / 1000)
+            clicks = impressions / 1000
+            # Taking absolute values because some negative numbers were creeping in;
+            # half normal distribution
             if id in range(1, 5):
                 # High conversion (more specific) keywords
-                converted_clicks = round(clicks / random.normalvariate((10/3), math.sqrt(variance[id - 1])))
+                converted_clicks = round(clicks / abs(random.normalvariate((10/3), math.sqrt(variance[id - 1]))))
             elif id in range (6, 9):
                 # Medium conversion keywords
-                converted_clicks = round(clicks / random.normalvariate((10/2), math.sqrt(variance[id - 1])))
+                converted_clicks = round(clicks / abs(random.normalvariate((10/2), math.sqrt(variance[id - 1]))))
             elif id in range (10, 12):
                 # Low conversion (more general) keywords
-                converted_clicks = round(clicks / random.normalvariate((10/1), math.sqrt(variance[id - 1])))
+                converted_clicks = round(clicks / abs(random.normalvariate((10/1), math.sqrt(variance[id - 1]))))
             cost = cpc * clicks
             revenue = converted_clicks * 10
             leads = converted_clicks
