@@ -61,7 +61,7 @@ def keyword_performance(keyword):
     for row in query_db('select * from keyword_performance where keyword_id = ? and date between ? and ?', 
                         (keyword_id['keyword_id'], start_date, end_date)):
         revenue = str.strip(row['revenue'], '$')
-        data.append(float(revenue))
+        data.append(float(revenue) / row['clicks'])
        
     rpc = statistics.mean(data)
     std = statistics.stdev(data)

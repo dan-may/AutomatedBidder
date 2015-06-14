@@ -39,6 +39,7 @@ if __name__ == '__main__':
     variance = (0.1, 2, 1.7, 5.7, 3.3, 0.3, 0.4, 1, 7.2, 3, 3.2, 4.5)
 
     # Iterate over keywords to produce performance data for each keyword each day
+    # Using third-party library 'dateutil' for easy iterations
     for day in rrule.rrule(rrule.DAILY, dtstart=start, until=end):
         days.append((day))
         for keyword in keywords:
