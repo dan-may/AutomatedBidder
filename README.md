@@ -1,0 +1,3 @@
+# AutomatedBidder
+
+Do some stuff
