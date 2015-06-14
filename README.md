@@ -12,7 +12,7 @@ Built on Python **3.4**
 
 ### Syntax for querying:
 - *```python automated_bidder.py <date:start_date> <date:end_date> <string:keyword> <decimal:margin>```*
-- Keyword must be in quotes (double or single quotes depends on shell, Windows usually double, Unix single)
+- ```<string:keyword>``` must be in quotes (double or single quotes depends on shell, Windows usually double, Unix single)
 
 ### Keywords:
 - "buy vinyl records"
