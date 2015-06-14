@@ -1,4 +1,4 @@
-# AutomatedBidder
+# Automated Bidder
 
 Built on Python **3.4**
 
