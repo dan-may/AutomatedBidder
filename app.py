@@ -13,7 +13,7 @@ app = Flask(__name__)
 # Make the WSGI interface available at the top level so wfastcgi can get it.
 wsgi_app = app.wsgi_app
 
-DATABASE = 'logicnow.db'
+DATABASE = 'adwords.db'
 
 def connect_to_database():
     return sqlite3.connect(DATABASE)

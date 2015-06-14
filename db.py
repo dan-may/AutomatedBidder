@@ -15,11 +15,7 @@ if __name__ == '__main__':
 
     start = datetime.date(2013, 1, 1)
     end = datetime.date(2014, 9, 1)
-
-    #while start < end:
-    #    print(start.year, start.month, start.day)
-    #    start += datetime.timedelta(days=1)
-
+    
     keyword_performance = []
     days = []
     
@@ -64,7 +60,7 @@ if __name__ == '__main__':
                  locale.currency(revenue),
                  leads))
 
-    con = sqlite3.connect("logicnow.db")
+    con = sqlite3.connect("adwords.db")
 
     # Enable foreign keys
     con.execute("pragma foreign_keys = on")
