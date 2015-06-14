@@ -7,6 +7,7 @@ import sqlite3
 import datetime
 import random
 import locale
+import math
 from dateutil import rrule
 
 if __name__ == '__main__':
@@ -21,30 +22,39 @@ if __name__ == '__main__':
     
     # Populate keywords
     keywords = [
-        ("vinyl records", None),
+        ("buy vinyl records", None),
         ("music download", None),
-        ("music", None),
-        ("24-bit hi-res", None),
         ("flac download", None),
-        ("flac music download", None),
-        ("24-bit", None),
-        ("high definition music", None),
         ("album download", None),
         ("single download", None),
+        ("flac music download", None),
+        ("24-bit hi-res", None),
+        ("24-bit", None),
+        ("high definition music", None),
         ("where can I download music", None),
-        ("free music download", None)
-               ]
+        ("free music download", None),
+        ("music", None)
+                ]
+    
+    variance = (0.1, 10, 7, 15, 30, 0.3, 0.4, 1, 12, 16, 15, 4.5)
 
     # Iterate over keywords to produce performance data for each keyword each day
-    # TODO: Change randomint to normal distribution
     for day in rrule.rrule(rrule.DAILY, dtstart=start, until=end):
         days.append((day))
         for keyword in keywords:
             id = keywords.index(keyword) + 1
-            cpc = random.normalvariate(1, 0.4)
+            cpc = random.normalvariate(1, 0.2)
             impressions = random.randint(1000000, 10000000)
-            clicks = random.randint(1000, 1000000)
-            converted_clicks = random.randint(200, 200000)
+            clicks = round(impressions / 1000)
+            if id in range(1, 5):
+                # High conversion (more specific) keywords
+                converted_clicks = round(clicks / random.normalvariate((10/3), math.sqrt(variance[id - 1])))
+            elif id in range (6, 9):
+                # Medium conversion keywords
+                converted_clicks = round(clicks / random.normalvariate((10/2), math.sqrt(variance[id - 1])))
+            elif id in range (10, 12):
+                # Low conversion (more general) keywords
+                converted_clicks = round(clicks / random.normalvariate((10/1), math.sqrt(variance[id - 1])))
             cost = cpc * clicks
             revenue = converted_clicks * 10
             leads = converted_clicks
